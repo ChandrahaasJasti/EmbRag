@@ -40,7 +40,7 @@ class VectorStore(ABC):
         pass
 
     @abstractmethod
-    def update_index(self, query: str) -> list[str]: #That auto caching and chunking logic here
+    def update_index(self, docs_path: str, cache_path: str) -> list[str]: #That auto caching and chunking logic here
         pass
 
     @abstractmethod
