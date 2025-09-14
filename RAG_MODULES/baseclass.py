@@ -41,7 +41,7 @@ class VectorStore(ABC):
         pass
 
     @abstractmethod
-    def chunk_text(self, query: str) -> list[str]:
+    def retrieve_chunks(self, query: str) -> list[str]:
         pass
 
 """------------------------------------------------------------------------------------------------"""
@@ -71,4 +71,20 @@ class BenchmarkRag(ABC):
     def get_results(self) -> dict:
         pass
     
+"""------------------------------------------------------------------------------------------------"""
+
+class VectorEngine(ABC):
+
+    @abstractmethod
+    def get_embeddings(self, text: str) -> np.ndarray:
+        pass
+
+    @abstractmethod
+    def re_rank(self, query: str, chunks: list[str]) -> list[float]:
+        pass
+    
+    @abstractmethod
+    def chunk_text(self, query: str) -> list[str]:
+        pass
+
 """------------------------------------------------------------------------------------------------"""
