@@ -2,35 +2,18 @@ from baseclass import BaseRag,VectorStore,BenchmarkRag
 import requests
 import numpy as np
 
-class OllamaRag(BaseRag):
-    def __init__(self, model_name: str, chunk_size: int, top_k: int):
-        self.model_name = model_name
-        self.chunk_size = chunk_size
-        self.top_k = top_k
+class EmbRag(BaseRag):
+    def __init__(self, vector_store: VectorStore):
+        self.vectorDB=vector_store
 
-    def query(self, query: str) -> str:
-        return "This is a test query"
-
-    def get_embedding(self,text):
-        response = requests.post(
-            "http://localhost:11434/api/embeddings",
-            json={
-                "model": "nomic-embed-text",
-                "prompt": text
-            }
-        )
-        response.raise_for_status()
-        return np.array(response.json()["embedding"], dtype=np.float32)
-
-    def retrieve_chunks(self, text: str) -> list[str]:
-        return []
+    def retrieve_memory(self, query: str) -> str:
+        pass
 
     def enhance_query(self, query: str) -> str:
-        return query
-    
+        pass
+
     def summarizer(self, chunks: list[str], query: str) -> str:
-        return "This is a test summarizer"
-    
+        pass
 
 class FaissVectorStore(VectorStore):
     def __init__(self, docs_path: str,faiss_path: str):
@@ -51,6 +34,9 @@ class FaissVectorStore(VectorStore):
 
     def chunk_text(self, query: str) -> list[str]:
         return super().chunk_text(query)
+
+    def retrieve_chunks(self, text: str) -> list[str]:
+        return []
     
     
 

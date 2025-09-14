@@ -8,16 +8,9 @@ class BaseRag(ABC):
     """
         Base class for all RAG pipelines.
     """
-    @abstractmethod
-    def query(self, text: str) -> str:
-        pass
 
     @abstractmethod
-    def get_embeddings(self, text: str) -> np.ndarray:
-        pass
-
-    @abstractmethod
-    def retrieve_chunks(self, text: str) -> list[str]:
+    def retrieve_memory(self, text: str) -> list[str]:
         pass
     
     @abstractmethod
